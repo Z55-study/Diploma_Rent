@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Взятые велосипеды</h1>
+
+    {% if bikeinstance_list %}
+    <ul>
+
+      {% for bikeinst in bikeinstance_list %}
+      <li class="{% if binst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'bike-detail' bikeinst.bike.pk %}">{{bikeinst.bike.title}}</a> ({{ bikeinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Велосипедов взаймы нет.</p>
+    {% endif %}
+{% endblock %}

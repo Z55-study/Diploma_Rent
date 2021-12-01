@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Велосипедный гараж</h1>
+
+<p>Добро пожаловать в <em>гараж</em>, Мы рады Вам.</p>
+<p>Выбери велосипед и вперед кататься.</p>
+
+
+<h2>Болеее 120 моделей велосипедов</h2>
+<p>Топ ты ты можешь увидеть ниже </p>
+
+<div>
+{% load static %}
+<img src="{% static "images/local_rent_bike.jpeg" %}" alt="My image" style="width:555px;height:540px;"/>
+</div>
+
+
+<h2>Статистика гаража</h2>
+
+<p>Конкретные факты:</p>
+<ul>
+<li><strong>Велосипеды:</strong> {{ num_bikes }}</li>
+<li><strong>Производители:</strong> {{ num_authors }}</li>
+</ul>
+
+
+<p>Вы посетили эту страницу {{ num_visits }} раз.</p>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Велосипеды</h1>
+
+    {% if bike_list %}
+    <ul>
+
+      {% for bike in bike_list %}
+      <li>
+        <a href="{{ bike.get_absolute_url }}">{{ bike.title }}</a> ({{bike.author}})
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>В аренде нет велосипедов.</p>
+    {% endif %}
+{% endblock %}

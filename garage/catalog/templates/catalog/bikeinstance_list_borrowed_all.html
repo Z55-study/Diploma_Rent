@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Все взятые книги</h1>
+
+    {% if bikeinstance_list %}
+    <ul>
+
+      {% for bikeinst in bikeinstance_list %}
+      <li class="{% if bikeinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'bike-detail' bikeinst.bike.pk %}">{{bikeinst.bike.title}}</a> ({{ bikeinst.due_back }}) {% if user.is_staff %}- {{ bikeinst.borrower }}{% endif %} {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-bike-librarian' bikeinst.id %}">Renew</a>  {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Свободных велосипедов нет.</p>
+    {% endif %}
+{% endblock %}

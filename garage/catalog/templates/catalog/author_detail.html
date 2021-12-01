@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Производитель: {{ author }} </h1>
+<p>{{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Велосипеды</h4>
+
+<dl>
+{% for bike in author.bike_set.all %}
+  <dt><a href="{% url 'bike-detail' bike.pk %}">{{bike}}</a> ({{bike.bikeinstance_set.all.count}})</dt>
+  <dd>{{bike.summary}}</dd>
+{% endfor %}
+</dl>
+
+</div>
+{% endblock %}

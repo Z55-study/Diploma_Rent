@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Велосипед: {{ bike.title }}</h1>
+
+<p><strong>Производитель:</strong> <a href="{{ bike.author.get_absolute_url }}">{{ bike.author }}</a></p>
+<p><strong>Описание:</strong> {{ bike.summary }}</p>
+<p><strong>Номер рамы:</strong> {{ bike.isbn }}</p>
+<p><strong>Пол:</strong> {{ bike.sex }}</p>
+<p><strong>Тип:</strong> {{ bike.typ.all|join:", " }}</p>
+<img src="{{ bike.photo.url }}" alt="{{ book.title }}" style="width:300px;">
+<div style="margin-left:20px;margin-top:20px">
+
+
+{% for copy in bike.bikeinstance_set.all %}
+<hr>
+<p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+{% if copy.status != 'a' %}<p><strong>Подлежит возврату:</strong> {{copy.due_back}}</p>{% endif %}
+<p><strong>Комментарии:</strong> {{copy.imprint}}</p>
+<p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+
+{% endfor %}
+</div>
+{% endblock %}
